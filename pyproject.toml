@@ -9,6 +9,10 @@ readme = "README.md"
 python = "^3.11"
 streamlit = "^1.26.0"
 poethepoet = "^0.22.1"
+service-test-tools = {git = "https://github.com/jataware/service-test-tools"}
+
+[tool.poetry.group.ta1.dependencies]
+knowledge-middleware = {git = "https://github.com/DARPA-ASKEM/knowledge-middleware", rev = "remove-extra-group", develop=true}
 
 [tool.poe.tasks]
 ui = "streamlit run dashboard/ui/Home.py"
