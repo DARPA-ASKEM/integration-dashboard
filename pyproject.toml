@@ -12,7 +12,7 @@ poethepoet = "^0.22.1"
 service-test-tools = {git = "https://github.com/jataware/service-test-tools"}
 
 [tool.poetry.group.ta1.dependencies]
-knowledge-middleware = {git = "https://github.com/DARPA-ASKEM/knowledge-middleware", rev = "remove-extra-group", develop=true}
+knowledge-middleware = {git = "https://github.com/DARPA-ASKEM/knowledge-middleware"}
 
 [tool.poe.tasks]
 ui = "streamlit run dashboard/ui/Home.py"

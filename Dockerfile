@@ -9,5 +9,7 @@ COPY dashboard dashboard
 
 RUN poetry install
 
+COPY outputs outputs
+
 EXPOSE 8501
 CMD poetry run poe ui
