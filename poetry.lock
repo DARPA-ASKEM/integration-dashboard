@@ -309,25 +309,6 @@ json = ["jsonpath-ng (>=1.5,<2.0)"]
 lua = ["lupa (>=1.14,<3.0)"]
 
 [[package]]
-name = "fastapi"
-version = "0.100.1"
-description = "FastAPI framework, high performance, easy to learn, fast to code, ready for production"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "fastapi-0.100.1-py3-none-any.whl", hash = "sha256:ec6dd52bfc4eff3063cfcd0713b43c87640fefb2687bbbe3d8a08d94049cdf32"},
-    {file = "fastapi-0.100.1.tar.gz", hash = "sha256:522700d7a469e4a973d92321ab93312448fbe20fca9c8da97effc7e7bc56df23"},
-]
-
-[package.dependencies]
-pydantic = ">=1.7.4,<1.8 || >1.8,<1.8.1 || >1.8.1,<2.0.0 || >2.0.0,<2.0.1 || >2.0.1,<3.0.0"
-starlette = ">=0.27.0,<0.28.0"
-typing-extensions = ">=4.5.0"
-
-[package.extras]
-all = ["email-validator (>=2.0.0)", "httpx (>=0.23.0)", "itsdangerous (>=1.1.0)", "jinja2 (>=2.11.2)", "orjson (>=3.2.1)", "pydantic-extra-types (>=2.0.0)", "pydantic-settings (>=2.0.0)", "python-multipart (>=0.0.5)", "pyyaml (>=5.3.1)", "ujson (>=4.0.1,!=4.0.2,!=4.1.0,!=4.2.0,!=4.3.0,!=5.0.0,!=5.1.0)", "uvicorn[standard] (>=0.12.0)"]
-
-[[package]]
 name = "gitdb"
 version = "4.0.10"
 description = "Git Object Database"
@@ -343,13 +324,13 @@ smmap = ">=3.0.1,<6"
 
 [[package]]
 name = "gitpython"
-version = "3.1.34"
+version = "3.1.35"
 description = "GitPython is a Python library used to interact with Git repositories"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "GitPython-3.1.34-py3-none-any.whl", hash = "sha256:5d3802b98a3bae1c2b8ae0e1ff2e4aa16bcdf02c145da34d092324f599f01395"},
-    {file = "GitPython-3.1.34.tar.gz", hash = "sha256:85f7d365d1f6bf677ae51039c1ef67ca59091c7ebd5a3509aa399d4eda02d6dd"},
+    {file = "GitPython-3.1.35-py3-none-any.whl", hash = "sha256:c19b4292d7a1d3c0f653858db273ff8a6614100d1eb1528b014ec97286193c09"},
+    {file = "GitPython-3.1.35.tar.gz", hash = "sha256:9cbefbd1789a5fe9bcf621bb34d3f441f3a90c8461d377f84eda73e721d9b06b"},
 ]
 
 [package.dependencies]
@@ -510,26 +491,24 @@ description = ""
 optional = false
 python-versions = "^3.10"
 files = []
-develop = true
+develop = false
 
 [package.dependencies]
-fastapi = "^0.100.0"
 idna = "^3.4"
 pandas = "^2.0.3"
 pydantic = "^2.0.2"
 pydantic-settings = "^2.0.3"
-pypdf = "^3.12.0"
 python-multipart = "^0.0.6"
 redis = "^4.6.0"
 requests = "^2.31.0"
 rq = "^1.15.1"
-uvicorn = "^0.22.0"
+streamlit = "^1.26.0"
 
 [package.source]
 type = "git"
 url = "https://github.com/DARPA-ASKEM/knowledge-middleware"
-reference = "remove-extra-group"
-resolved_reference = "9de5ec67b33f8ee300631ba98fb7ce8b17636030"
+reference = "HEAD"
+resolved_reference = "6d92a708647c085cd395b467ddb4f45f8c0d63e2"
 
 [[package]]
 name = "markdown-it-py"
@@ -1111,24 +1090,6 @@ files = [
 ]
 
 [[package]]
-name = "pypdf"
-version = "3.15.5"
-description = "A pure-python PDF library capable of splitting, merging, cropping, and transforming PDF files"
-optional = false
-python-versions = ">=3.6"
-files = [
-    {file = "pypdf-3.15.5-py3-none-any.whl", hash = "sha256:8e003c4ee4875450612c2571ba9a5cc12d63a46b226a484314b21b7f013d2717"},
-    {file = "pypdf-3.15.5.tar.gz", hash = "sha256:81cf6e8a206450726555023a36c13fb40f680c047b8fcc0bcbfd4d1908c33d31"},
-]
-
-[package.extras]
-crypto = ["PyCryptodome", "cryptography"]
-dev = ["black", "flit", "pip-tools", "pre-commit (<2.18.0)", "pytest-cov", "pytest-socket", "pytest-timeout", "wheel"]
-docs = ["myst_parser", "sphinx", "sphinx_rtd_theme"]
-full = ["Pillow (>=8.0.0)", "PyCryptodome", "cryptography"]
-image = ["Pillow (>=8.0.0)"]
-
-[[package]]
 name = "pytest"
 version = "7.4.1"
 description = "pytest: simple powerful testing with Python"
@@ -1546,23 +1507,6 @@ files = [
 ]
 
 [[package]]
-name = "starlette"
-version = "0.27.0"
-description = "The little ASGI library that shines."
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "starlette-0.27.0-py3-none-any.whl", hash = "sha256:918416370e846586541235ccd38a474c08b80443ed31c578a418e2209b3eef91"},
-    {file = "starlette-0.27.0.tar.gz", hash = "sha256:6a6b0d042acb8d469a01eba54e9cda6cbd24ac602c4cd016723117d6a7e73b75"},
-]
-
-[package.dependencies]
-anyio = ">=3.4.0,<5"
-
-[package.extras]
-full = ["httpx (>=0.22.0)", "itsdangerous", "jinja2", "python-multipart", "pyyaml"]
-
-[[package]]
 name = "streamlit"
 version = "1.26.0"
 description = "A faster way to build and share data apps"
@@ -1727,24 +1671,6 @@ socks = ["pysocks (>=1.5.6,!=1.5.7,<2.0)"]
 zstd = ["zstandard (>=0.18.0)"]
 
 [[package]]
-name = "uvicorn"
-version = "0.22.0"
-description = "The lightning-fast ASGI server."
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "uvicorn-0.22.0-py3-none-any.whl", hash = "sha256:e9434d3bbf05f310e762147f769c9f21235ee118ba2d2bf1155a7196448bd996"},
-    {file = "uvicorn-0.22.0.tar.gz", hash = "sha256:79277ae03db57ce7d9aa0567830bbb51d7a612f54d6e1e3e92da3ef24c2c8ed8"},
-]
-
-[package.dependencies]
-click = ">=7.0"
-h11 = ">=0.8"
-
-[package.extras]
-standard = ["colorama (>=0.4)", "httptools (>=0.5.0)", "python-dotenv (>=0.13)", "pyyaml (>=5.1)", "uvloop (>=0.14.0,!=0.15.0,!=0.15.1)", "watchfiles (>=0.13)", "websockets (>=10.4)"]
-
-[[package]]
 name = "validators"
 version = "0.22.0"
 description = "Python Data Validation for Humans™"
@@ -1823,4 +1749,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "5e34e2014861cd4e1b22d79c2f08cbf5252d92e88f8563bc9044c716a90ca314"
+content-hash = "bdf6d29852a9d625bc2d978905f03ac262d17acb06c8f29ee26df448c4abfe62"
