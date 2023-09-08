@@ -9,6 +9,14 @@ COPY dashboard dashboard
 
 RUN poetry install
 
+RUN mkdir services
+COPY services/knowledge-middleware services/knowledge-middleware
+WORKDIR services/knowledge-middleware
+RUN poetry install --with api
+WORKDIR /
+
+COPY scripts scripts
+
 ENV AWS_ACCESS_KEY_ID notprovided
 ENV AWS_SECRET_ACCESS_KEY notprovided
 ENV BUCKET notprovided
