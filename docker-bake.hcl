@@ -29,11 +29,11 @@ function "check_suffix" {
 # ----------------------------------------------------------------------------------------------------------------------
 
 group "prod" {
-  targets = ["knowledge-middleware-api", "knowledge-middleware-worker"]
+  targets = ["integration-dashboard"]
 }
 
 group "default" {
-  targets = ["knowledge-middleware-api-base", "knowledge-middleware-worker-base"]
+  targets = ["integration-dashboard-base"]
 }
 
 # ----------------------------------------------------------------------------------------------------------------------
