@@ -9,8 +9,6 @@ COPY dashboard dashboard
 
 RUN poetry install
 
-COPY outputs outputs
-
 ENV AWS_ACCESS_KEY_ID notprovided
 ENV AWS_SECRET_ACCESS_KEY notprovided
 ENV BUCKET notprovided
