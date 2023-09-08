@@ -4,17 +4,21 @@ version = "0.1.0"
 description = ""
 authors = ["Five Grant <5@jataware.com>"]
 readme = "README.md"
+packages = [{include = "dashboard"}]
+
 
 [tool.poetry.dependencies]
 python = "^3.11"
 streamlit = "^1.26.0"
 poethepoet = "^0.22.1"
 service-test-tools = {git = "https://github.com/jataware/service-test-tools"}
+boto3 = "^1.28.43"
 
 [tool.poetry.group.ta1.dependencies]
 knowledge-middleware = {git = "https://github.com/DARPA-ASKEM/knowledge-middleware"}
 
 [tool.poe.tasks]
+upload-ta1.script = "dashboard.generate.storage:upload_reports"
 ui = "streamlit run dashboard/ui/Home.py"
 
 [build-system]

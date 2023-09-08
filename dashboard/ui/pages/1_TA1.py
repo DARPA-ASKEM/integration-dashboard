@@ -8,6 +8,8 @@ from collections import defaultdict
 import streamlit as st
 import pandas as pd
 
+from dashboard.generate.storage import download
+
 
 def custom_title(s):
     # List of words you want to fully capitalize
@@ -16,11 +18,6 @@ def custom_title(s):
     words = s.replace('_', ' ').split()
     capitalized_words = [word.upper() if word in FULL_CAPS else word.title() for word in words]
     return ' '.join(capitalized_words)
-
-# Get a list of all report files with timestamp
-report_dir = "outputs/ta1"
-report_files = [f for f in os.listdir(report_dir) if re.match(r'report_\d{8}_\d{6}\.json', f)]
-report_files.sort(reverse=True)  # Sort the files so the most recent is on top
 
 def format_timestamp_from_filename(filename):
     # Extract timestamp from filename
@@ -31,21 +28,17 @@ def format_timestamp_from_filename(filename):
         dt = datetime.datetime.strptime(f"{date_part}{time_part}", '%Y%m%d%H%M%S')
         # Return formatted string
         return dt.strftime('%Y-%m-%d %H:%M:%S')
-    return None
+    else:
+        raise Exception("Extra file was included")
 
-# Create a mapping of formatted timestamp to filename
+report_files = download()
 timestamp_to_filename = {format_timestamp_from_filename(f): f for f in report_files}
 
 # Let the user select a report based on formatted timestamps
 st.title("TA1 Integration Dashboard")
-selected_timestamp = st.selectbox("Select a report", list(timestamp_to_filename.keys()))
+selected_timestamp = st.selectbox("Select a report", sorted(timestamp_to_filename.keys(), reverse=True))
 
-# Map back to the original file name
-selected_report = timestamp_to_filename[selected_timestamp]
-
-# Open the selected report
-with open(os.path.join(report_dir, selected_report)) as file:
-    report = json.load(file)
+report = report_files[timestamp_to_filename[selected_timestamp]]
 
 test_results = defaultdict(lambda: defaultdict())
 
