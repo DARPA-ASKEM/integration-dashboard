@@ -17,9 +17,10 @@ To set up the project, run
 make init  
 ```
 
-To add a new report, run
+To add a new report, run from [`knowledge-middleware`](https://github.com/DARPA-ASKEM/knowledge-middleware) (NOT THIS REPO)
 ```
-make report
+# REMINDER: RUN THIS IN `knowledge-middleware`
+poetry run poe report
 ```
 This uploads a `report_{datetime}.json` to S3 which the dashboard reads
 off of directly.

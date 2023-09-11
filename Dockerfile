@@ -10,21 +10,9 @@ COPY dashboard dashboard
 
 RUN poetry install
 
-RUN mkdir services
-COPY services/knowledge-middleware services/knowledge-middleware
-WORKDIR services/knowledge-middleware
-RUN poetry install --with api
-WORKDIR /
-
-COPY scripts scripts
-COPY Makefile Makefile
-
 ENV AWS_ACCESS_KEY_ID notprovided
 ENV AWS_SECRET_ACCESS_KEY notprovided
 ENV BUCKET notprovided
-ENV SKEMA_RS_URL http://skema-rs.staging.terarium.ai
-ENV TA1_UNIFIED_URL https://api.askem.lum.ai
-ENV MIT_TR_URL http://3.83.68.208
 
 EXPOSE 8501
 CMD poetry run poe ui
