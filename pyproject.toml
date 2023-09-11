@@ -18,7 +18,6 @@ boto3 = "^1.28.43"
 knowledge-middleware = {git = "https://github.com/DARPA-ASKEM/knowledge-middleware"}
 
 [tool.poe.tasks]
-upload-ta1.script = "dashboard.generate.storage:upload_reports"
 ui = "streamlit run dashboard/ui/Home.py"
 
 [build-system]

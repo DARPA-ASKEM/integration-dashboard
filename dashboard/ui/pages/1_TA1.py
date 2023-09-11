@@ -8,7 +8,7 @@ from collections import defaultdict
 import streamlit as st
 import pandas as pd
 
-from dashboard.generate.storage import download
+from dashboard.ui.utils.storage import download
 
 
 def custom_title(s):

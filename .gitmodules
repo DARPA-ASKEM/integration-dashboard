@@ -1,3 +1,0 @@
-[submodule "services/knowledge-middleware"]
-	path = services/knowledge-middleware
-	url = git@github.com:DARPA-ASKEM/knowledge-middleware.git
