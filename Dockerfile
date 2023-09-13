@@ -10,6 +10,7 @@ COPY dashboard dashboard
 
 RUN poetry install
 
+COPY .streamlit .streamlit
 ENV AWS_ACCESS_KEY_ID notprovided
 ENV AWS_SECRET_ACCESS_KEY notprovided
 ENV BUCKET notprovided
