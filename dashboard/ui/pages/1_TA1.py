@@ -66,6 +66,20 @@ The current metrics are:
 - Execution time
 - Application logs
 """)
+
+"""
+### Tests Overview
+
+* `Equations to AMR`: tests the ability to send a set of equations to `SKEMA` and to receive a valid AMR as response. Currently only LaTeX is tested.
+* `Code to AMR`: tests the ability to send a code snippet (model core dynamics) to `SKEMA` and to receive a valid AMR as response. Currently only Python is tested.
+* `PDF Extraction`: tests the ability to send a PDF’s text content to `SKEMA` and to receive metadata extractions and groundings in response.
+* `Profile Dataset`: tests the ability to send a CSV dataset and corresponding documentation to `MIT` and to receive a “data card” in response.
+* `PDF to Text`: tests the ability to send a PDF to `Cosmos` and to receive extracted text in response. 
+* `Profile Model`: tests the ability to send a valid AMR and corresponding documentation to `MIT` and to receive a “model card” in response.
+
+Currently tests are run against SKEMA, MIT and Cosmos public instances.
+"""
+
 st.write("### Scenario Overview")
 scenarios_overview = ""
 for kk, vv in sorted(report.items(), key=lambda item: item[1]['name']):
