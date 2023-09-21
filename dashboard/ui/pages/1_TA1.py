@@ -40,15 +40,23 @@ selected_timestamp = st.selectbox("Select a report", sorted(timestamp_to_filenam
 
 report = report_files[timestamp_to_filename[selected_timestamp]]
 
+if "scenarios" not in report: # OLD FORMAT
+    report_scenarios = report
+    services = None
+else: # NEW FORMAT
+    report_scenarios = report["scenarios"]
+    services = report["services"]
+    
+
 test_results = defaultdict(lambda: defaultdict())
 
-for scenario, content in report.items():
+for scenario, content in report_scenarios.items():
     for operation, tests in content["operations"].items():
         for name, result in tests.items():
             test_results[name][(content["name"], operation)] = result
 
-scenarios = [report[scenario]["name"] for scenario in report.keys()]
-operations = list(reduce(lambda left, right: left.union(right), [set(content["operations"].keys()) for content in report.values()], set()))
+scenarios = [report_scenarios[scenario]["name"] for scenario in report_scenarios.keys()]
+operations = list(reduce(lambda left, right: left.union(right), [set(content["operations"].keys()) for content in report_scenarios.values()], set()))
 tests = sorted([i for i in test_results.keys() if i != "Logs"], reverse=True)
 tests.append("Logs")
 
@@ -80,9 +88,20 @@ The current metrics are:
 Currently tests are run against SKEMA, MIT and Cosmos public instances.
 """
 
+if services is not None:
+    st.write("### Service Info")
+    service_names = list(services.keys())
+    service_data = {
+        "Service": service_names,
+        "Source": [services[name]["source"] for name in service_names],
+        "Version": [services[name]["version"] for name in service_names],
+    }
+    st.dataframe(pd.DataFrame(service_data), hide_index=True)
+
+
 st.write("### Scenario Overview")
 scenarios_overview = ""
-for kk, vv in sorted(report.items(), key=lambda item: item[1]['name']):
+for kk, vv in sorted(report_scenarios.items(), key=lambda item: item[1]['name']):
     scenarios_overview += f"- **{vv['name']}**: {vv['description']}\n"
 st.write(scenarios_overview)
 
