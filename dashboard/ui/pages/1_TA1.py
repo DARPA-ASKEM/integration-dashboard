@@ -21,13 +21,14 @@ def custom_title(s):
 
 def format_timestamp_from_filename(filename):
     # Extract timestamp from filename
-    match = re.search(r'report_(\d{8})_(\d{6})\.json', filename)
+    match = re.search(r'report(?:_local)?_(\d{8})_(\d{6})\.json', filename)
     if match:
         date_part, time_part = match.groups()
+        is_local = "_local" if "_local" in filename else ""
         # Convert to datetime object
         dt = datetime.datetime.strptime(f"{date_part}{time_part}", '%Y%m%d%H%M%S')
         # Return formatted string
-        return dt.strftime('%Y-%m-%d %H:%M:%S')
+        return f'{dt.strftime("%Y-%m-%d %H:%M:%S")}{is_local}'
     else:
         raise Exception("Extra file was included")
 
