@@ -49,22 +49,18 @@ proper_names = {
 for service in proper_names:
     test_results = defaultdict(lambda: defaultdict())
 
-    for scenario, content in report_scenarios["scenarios"].items():
-        for operation, tests in content["operations"].items():
+    for scenario, content in report_scenarios[service].items():
+        for operation, tests in content.items():
             for name, result in tests.items():
-                test_results[name][(content["name"], operation)] = result
+                test_results[name][(name, operation)] = result
 
     scenarios = list(report_scenarios[service].keys())
-    operations = list(reduce(lambda left, right: left.union(right), [set(content["operations"].keys()) for content in report_scenarios[service].values()], set()))
+    operations = list(reduce(lambda left, right: left.union(right), [set(content.keys()) for content in report_scenarios[service].values()], set()))
     tests = sorted([i for i in test_results.keys()], reverse=True)
     dataframes = {name: pd.DataFrame(index=scenarios, columns=operations) for name in tests}
 
 
     st.write(f"### {proper_names[service]} Overview")
-    scenarios_overview = ""
-    for kk, vv in sorted(report_scenarios.items(), key=lambda item: item[1]['name']):
-        scenarios_overview += f"- **{vv['name']}**: {vv['description']}\n"
-    st.write(scenarios_overview)
 
     for test in tests:
         df = dataframes[test]
