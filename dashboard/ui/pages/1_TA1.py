@@ -1,44 +1,21 @@
 import json
 import datetime
 import os
-import re
 from functools import reduce
 from collections import defaultdict
 
 import streamlit as st
 import pandas as pd
 
-from dashboard.ui.utils.storage import download
-
-
-def custom_title(s):
-    # List of words you want to fully capitalize
-    FULL_CAPS = ['pdf', 'amr']
-
-    words = s.replace('_', ' ').split()
-    capitalized_words = [word.upper() if word in FULL_CAPS else word.title() for word in words]
-    return ' '.join(capitalized_words)
-
-def format_timestamp_from_filename(filename):
-    # Extract timestamp from filename
-    match = re.search(r'report_(\d{8})_(\d{6})\.json', filename)
-    if match:
-        date_part, time_part = match.groups()
-        # Convert to datetime object
-        dt = datetime.datetime.strptime(f"{date_part}{time_part}", '%Y%m%d%H%M%S')
-        # Return formatted string
-        return dt.strftime('%Y-%m-%d %H:%M:%S')
-    else:
-        raise Exception("Extra file was included")
-
-report_files = download()
-timestamp_to_filename = {format_timestamp_from_filename(f): f for f in report_files}
+from dashboard.ui.utils.storage import select_report
+from dashboard.ui.utils.formatting import custom_title
 
 # Let the user select a report based on formatted timestamps
 st.title("TA1 Integration Dashboard")
-selected_timestamp = st.selectbox("Select a report", sorted(timestamp_to_filename.keys(), reverse=True))
 
-report = report_files[timestamp_to_filename[selected_timestamp]]
+
+# Let the user select a report based on formatted timestamps
+report = select_report("ta1")
 
 if "scenarios" not in report: # OLD FORMAT
     report_scenarios = report
