@@ -52,7 +52,7 @@ for service in proper_names:
     for scenario, content in report_scenarios[service].items():
         for operation, tests in content.items():
             for name, result in tests.items():
-                test_results[name][(name, operation)] = result
+                test_results[name][(scenario, operation)] = result
 
     scenarios = list(report_scenarios[service].keys())
     operations = list(reduce(lambda left, right: left.union(right), [set(content.keys()) for content in report_scenarios[service].values()], set()))
