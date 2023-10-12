@@ -43,9 +43,9 @@ target "_platforms" {
 }
 
 target "integration-dashboard-base" {
-  context = ".."
+  context = "."
   tags = tag("integration-dashboard", "", "")
-  dockerfile = "Dockerfile"
+  dockerfile = "docker/Dockerfile"
 }
 
 target "integration-dashboard" {
