@@ -7,9 +7,16 @@ from collections import defaultdict
 import streamlit as st
 import pandas as pd
 
-from dashboard.utils.storage import select_report
-from dashboard.utils.formatting import custom_title
-from dashboard.sections import render_section_integration_status, render_section_pipeline, render_section_time, render_section_accuracy
+from dashboard.storage import select_report
+from dashboard.formatting import custom_title
+from dashboard.sections import (
+    render_section_scenario,
+    render_section_scenario_status, 
+    render_section_integration_status, 
+    render_section_scenario, 
+    render_section_time, 
+    render_section_accuracy
+)
 
 st.title("TA1 Integration Dashboard")
 
@@ -28,7 +35,7 @@ TODO
 """
 
 services = report["services"]
-st.write("### Service Info")
+st.write("## Service Info")
 service_names = list(services.keys())
 service_data = {
     "Service": service_names,
@@ -38,10 +45,11 @@ service_data = {
 st.dataframe(pd.DataFrame(service_data), hide_index=True)
 
 
-st.write("### Scenario Overview")
-"TODO"
+scenarios = report["scenarios"]
 
-render_section_integration_status(report)
-# render_section_time(report)
-# render_section_accuracy(report)
-render_section_pipeline(report)
+st.write("## Testing")
+render_section_scenario_status(scenarios)
+render_section_integration_status(scenarios)
+render_section_time(scenarios)
+render_section_accuracy(scenarios)
+render_section_scenario(scenarios)
