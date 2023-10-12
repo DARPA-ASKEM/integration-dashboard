@@ -6,9 +6,10 @@ RUN poetry config virtualenvs.create false
 COPY pyproject.toml pyproject.toml
 COPY poetry.lock poetry.lock
 COPY README.md README.md
-COPY dashboard dashboard
+RUN poetry install --no-root
 
-RUN poetry install
+COPY dashboard dashboard
+RUN poetry install --only-root
 
 COPY .streamlit .streamlit
 COPY outputs outputs
