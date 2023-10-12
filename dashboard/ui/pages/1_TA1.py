@@ -44,12 +44,6 @@ st.sidebar.markdown("""
 # TA1
 
 TA1 integration status and quality metrics.
-    
-The current metrics are:
-- Status of `knowledge-middleware` integration
-- F-score for conversion of code/equations to AMR
-- Execution time
-- Application logs
 """)
 
 """
