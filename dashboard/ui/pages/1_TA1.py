@@ -7,8 +7,8 @@ from collections import defaultdict
 import streamlit as st
 import pandas as pd
 
-from dashboard.ui.utils.storage import select_report
-from dashboard.ui.utils.formatting import custom_title
+from dashboard.utils.storage import select_report
+from dashboard.utils.formatting import custom_title
 
 # Let the user select a report based on formatted timestamps
 st.title("TA1 Integration Dashboard")

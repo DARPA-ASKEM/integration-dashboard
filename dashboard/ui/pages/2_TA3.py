@@ -8,8 +8,8 @@ from collections import defaultdict
 import streamlit as st
 import pandas as pd
 
-from dashboard.ui.utils.storage import select_report
-from dashboard.ui.utils.formatting import custom_title
+from dashboard.utils.storage import select_report
+from dashboard.utils.formatting import custom_title
 
 
 st.title("TA3 Integration Dashboard")
@@ -26,26 +26,26 @@ st.sidebar.markdown("""
 TA3 integration status
 """)
 
-# """
-# ### Tests Overview
+"""
+### Tests Overview
 
 
-# """
+"""
 
-# if services is not None:
-#     st.write("### Service Info")
-#     service_names = list(services.keys())
-#     service_data = {
-#         "Service": service_names,
-#         "Version": [services[name]["version"] for name in service_names],
-#     }
-#     st.dataframe(pd.DataFrame(service_data), hide_index=True)
+if services is not None:
+    st.write("### Service Info")
+    service_names = list(services.keys())
+    service_data = {
+        "Service": service_names,
+        "Version": [services[name]["version"] for name in service_names],
+    }
+    st.dataframe(pd.DataFrame(service_data), hide_index=True)
+
+
 proper_names = {
     "pyciemss": "PyCIEMSS",
     "sciml": "SciML"
 }
-
-
 for service in proper_names:
     test_results = defaultdict(lambda: defaultdict())
 
@@ -60,7 +60,7 @@ for service in proper_names:
     dataframes = {name: pd.DataFrame(index=scenarios, columns=operations) for name in tests}
 
 
-    st.write(f"### {proper_names[service]} Overview")
+    st.write(f"## {proper_names[service]} Overview")
 
     for test in tests:
         df = dataframes[test]

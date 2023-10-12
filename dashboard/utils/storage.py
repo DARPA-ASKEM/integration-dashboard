@@ -8,6 +8,7 @@ import datetime
 import streamlit as st
 
 BUCKET = os.environ.get("BUCKET")
+USE_LOCAL = os.environ.get("USE_LOCAL", "FALSE").lower() == "true" 
 s3 = boto3.client("s3")
 
 
@@ -24,6 +25,14 @@ def format_timestamp_from_filename(filename):
         raise Exception("Extra file was included")
 
 
+def fetch_local(ta):
+    files = glob("report*.json", root_dir=f"outputs/{ta}")
+    return {
+        file: json.load(open(f"outputs/{ta}/{file}"))
+        for file in files
+    }
+
+
 def download(ta):
     objects = s3.list_objects(Bucket=BUCKET, Prefix=ta)
     handles = [content["Key"] for content in objects['Contents']]
@@ -36,7 +45,13 @@ def generate_timestamp_to_filenames(ta):
 
 
 def select_report(ta):
-    report_files = download(ta)
+    if not USE_LOCAL:
+        report_files = download(ta)
+    else:
+        report_files = fetch_local(ta)
+    if len(report_files) == 0:
+        st.warning("No reports available")
+        st.stop()
     timestamp_to_filename = {format_timestamp_from_filename(f): f for f in report_files}
     selected_timestamp = st.selectbox("Select a report", sorted(timestamp_to_filename.keys(), reverse=True))
     return report_files[timestamp_to_filename[selected_timestamp]]
