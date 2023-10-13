@@ -64,15 +64,15 @@ def render_section_integration_status(scenarios):
     st.write(f"### Integration Status")
     df = get_feature_table(scenarios, "success")
     df.replace({False: "❌", True: "✅", None: ""}, inplace=True)
-    st.dataframe(df, hide_index=True)
+    st.dataframe(df)
 
 def render_section_time(scenarios):
     st.write(f"### Execution Time")
     df = get_feature_table(scenarios, "time")
-    st.dataframe(df, hide_index=True)
+    st.dataframe(df)
 
 
 def render_section_accuracy(scenarios):
     st.write(f"### Accuracy")
     df = get_feature_table(scenarios, "accuracy")
-    st.dataframe(df, hide_index=True)
+    st.dataframe(df)
