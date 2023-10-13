@@ -10,10 +10,9 @@ import pandas as pd
 from dashboard.storage import select_report
 from dashboard.formatting import custom_title
 from dashboard.sections import (
-    render_section_scenario,
+    render_scenario_viewer,
     render_section_scenario_status, 
     render_section_integration_status, 
-    render_section_scenario, 
     render_section_time, 
     render_section_accuracy
 )
@@ -52,4 +51,4 @@ render_section_scenario_status(scenarios)
 render_section_integration_status(scenarios)
 render_section_time(scenarios)
 render_section_accuracy(scenarios)
-render_section_scenario(scenarios)
+render_scenario_viewer(scenarios)

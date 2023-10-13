@@ -7,8 +7,8 @@ import streamlit.components.v1 as components
 from dashboard.formatting import custom_title
 
 
-def render_section_scenario(scenarios):
-    st.write(f"### Flow Viewer")
+def render_scenario_viewer(scenarios):
+    st.write(f"### Scenario Viewer")
     scenario_name = st.selectbox("Select a pipeline:", list(scenarios.keys()))
     scenario = scenarios[scenario_name]
 
@@ -27,10 +27,8 @@ def render_section_scenario(scenarios):
     display = pipeline.generate_html()
 
     
-    st.write("""
-        ### Scenario Description
-        TODO: RENDER ONCE IT'S PROVIDED
-    """)
+    st.write(f"### {scenario_name}")
+    st.text(scenario["description"])
     st.metric("Total Time", total_time)
     components.html(display, height=800, width=800)
     
