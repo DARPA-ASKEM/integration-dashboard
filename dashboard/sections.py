@@ -49,7 +49,7 @@ def render_section_scenario_status(scenarios):
         "Scenario": list(scenarios.keys()),
         "Success": [scenario["success"] for scenario in scenarios.values()], 
         "Total Time": [
-            sum([step["time"] for step in scenario["steps"].values()]) 
+            round(sum([step["time"] for step in scenario["steps"].values()]),2) 
             for scenario in scenarios.values()
         ]
     }
@@ -79,7 +79,8 @@ def render_section_integration_status(scenarios):
 def render_section_time(scenarios):
     st.write(f"### Execution Time")
     df = get_feature_table(scenarios, "time")
-    st.dataframe(df.round(2))
+    df = df.applymap(lambda t: round(t,2), ) # `df.round(2)` is ineffective
+    st.dataframe(df)
 
 
 def render_section_accuracy(scenarios):
