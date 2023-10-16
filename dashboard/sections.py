@@ -22,14 +22,24 @@ def render_scenario_viewer(scenarios):
     shape = scenario["shape"]
     for link in shape:
         graph.add_edge(link["from"], link["to"])
+    nx.set_node_attributes(graph, "box", "shape")
     pipeline = Network(notebook=False, directed=True)
     pipeline.from_nx(graph)
+    pipeline.options = {
+        'layout': {
+            'hierarchical': {
+                'enabled': True,
+                'direction': 'LR',
+                'sortMethod': 'directed'
+            },
+        },
+    }
     display = pipeline.generate_html()
 
     
     st.write(f"### {scenario_name}")
     st.text(scenario["description"])
-    st.metric("Total Time", total_time)
+    st.metric("Total Time", round(total_time,2))
     components.html(display, height=800, width=800)
     
 
@@ -69,7 +79,7 @@ def render_section_integration_status(scenarios):
 def render_section_time(scenarios):
     st.write(f"### Execution Time")
     df = get_feature_table(scenarios, "time")
-    st.dataframe(df)
+    st.dataframe(df.round(2))
 
 
 def render_section_accuracy(scenarios):
