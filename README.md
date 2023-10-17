@@ -17,25 +17,19 @@ but other services and TAs might be checked in the future.
 To view the current status, start the [Streamlit](https://streamlit.io/) app
 by running:
 ```
+cp sample.env .env
+# Change `.env` as needed
 make up
 ```
-Upon execution, you can pass the following environment variables (with `docker run` do `-e ENV_NAME='ENV_VAL'` for each variable).
 
+### Options
 - `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`: Standard credentials for reading and writing to S3
 - `BUCKET`: The bucket you'd like to read and write to.
+- `USE_LOCAL`: Read from the gitignore files in `output/ta*` instead of S3.
 
-
+## Developing
 To set up the project for development, run
 ```
 make dev-init  
 ```
-
-To add a new report, run from [`knowledge-middleware`](https://github.com/DARPA-ASKEM/knowledge-middleware) (NOT THIS REPO)
-```
-# REMINDER: RUN THIS IN `knowledge-middleware`
-poetry run poe report
-```
-This uploads a `report_{datetime}.json` to S3 which the dashboard reads
-off of directly.
-
 
