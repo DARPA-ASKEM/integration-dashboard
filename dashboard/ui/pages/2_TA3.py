@@ -8,8 +8,8 @@ from collections import defaultdict
 import streamlit as st
 import pandas as pd
 
-from dashboard.utils.storage import select_report
-from dashboard.utils.formatting import custom_title
+from dashboard.storage import select_report
+from dashboard.formatting import custom_title
 
 
 st.title("TA3 Integration Dashboard")

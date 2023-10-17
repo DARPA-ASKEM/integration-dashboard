@@ -13,6 +13,8 @@ streamlit = "^1.26.0"
 poethepoet = "^0.22.1"
 service-test-tools = {git = "https://github.com/jataware/service-test-tools"}
 boto3 = "^1.28.43"
+pyvis = "^0.3.2"
+nx = "^0.0.0"
 
 [tool.poetry.group.ta1.dependencies]
 knowledge-middleware = {git = "https://github.com/DARPA-ASKEM/knowledge-middleware"}

@@ -7,6 +7,8 @@ import datetime
 
 import streamlit as st
 
+from dashboard.formatting import custom_title
+
 BUCKET = os.environ.get("BUCKET")
 USE_LOCAL = os.environ.get("USE_LOCAL", "FALSE").lower() == "true" 
 s3 = boto3.client("s3")
@@ -54,4 +56,10 @@ def select_report(ta):
         st.stop()
     timestamp_to_filename = {format_timestamp_from_filename(f): f for f in report_files}
     selected_timestamp = st.selectbox("Select a report", sorted(timestamp_to_filename.keys(), reverse=True))
-    return report_files[timestamp_to_filename[selected_timestamp]]
+    report = report_files[timestamp_to_filename[selected_timestamp]]    
+    # TODO: Remove conditional once TA1 and TA3 match
+    if ta == "ta1":
+        for scenario in report["scenarios"].values(): 
+            scenario["steps"] = { custom_title(name): step for name, step in scenario["steps"].items()}
+            scenario["shape"] = [ {"from": custom_title(edge["from"]), "to": custom_title(edge["to"])} for edge in scenario["shape"]]
+    return report 
