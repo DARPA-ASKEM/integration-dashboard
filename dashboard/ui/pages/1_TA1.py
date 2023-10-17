@@ -28,11 +28,6 @@ st.sidebar.markdown("""
 TA1 integration status and quality metrics.
 """)
 
-"""
-### Tests Overview
-TODO
-"""
-
 services = report["services"]
 st.write("## Service Info")
 service_names = list(services.keys())
