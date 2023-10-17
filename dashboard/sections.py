@@ -17,7 +17,10 @@ def render_scenario_viewer(scenarios):
     total_time = 0
     for step_name, step_details in steps.items():
         total_time += step_details["time"]
-        status_color = 'green' if step_details['success'] else 'red'
+        if step_details["success"] is not None:
+            status_color = 'green' if step_details['success'] else 'red'
+        else:
+            status_color = 'gray'
         graph.add_node(step_name, color=status_color)
     shape = scenario["shape"]
     for link in shape:
