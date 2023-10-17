@@ -9,7 +9,8 @@ Specifically, the dashboard indicates
 Currently, the dashboard is testing `knowledge-middleware` integration
 but other services and TAs might be checked in the future.
 
-![TA1 Dashboard Screenshot](https://github.com/DARPA-ASKEM/integration-dashboard/assets/14170067/da57d762-6e22-4130-ad34-ff790ef590e2)
+![TA1 Dashboard Screenshot](https://github.com/DARPA-ASKEM/integration-dashboard/assets/14170067/90e84a0b-ea0e-4d51-81b5-0c9b714a9713)
+
 
 
 ## Usage
