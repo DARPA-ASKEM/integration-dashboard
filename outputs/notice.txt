@@ -1,1 +1,0 @@
-Place your local reports in `outputs/ta1` and `outputs/ta3`.

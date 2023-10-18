@@ -1,0 +1,53 @@
+{
+  "scenarios": {
+    "pyciemss": {
+      "sidarthe": {
+        "simulate": {
+          "Integration Status": true,
+          "Execution Time": 57.38346266746521
+        },
+        "calibrate": {
+          "Integration Status": true,
+          "Execution Time": 120.6985228061676
+        },
+        "optimize-simulate": {
+          "Integration Status": true,
+          "Execution Time": 46.312392711639404
+        },
+        "optimize-calibrate": {
+          "Integration Status": true,
+          "Execution Time": 497.6224341392517
+        }
+      },
+      "sir-ensemble": {
+        "ensemble-calibrate": {
+          "Integration Status": true,
+          "Execution Time": 42.29396414756775
+        },
+        "ensemble-simulate": {
+          "Integration Status": true,
+          "Execution Time": 22.186060905456543
+        }
+      }
+    },
+    "sciml": {
+      "sidarthe": {
+        "simulate": {
+          "Integration Status": true,
+          "Execution Time": 46.338181018829346
+        }
+      }
+    }
+  },
+  "services": {
+    "TDS": {
+      "version": "UNAVAILABLE"
+    },
+    "PyCIEMSS Service": {
+      "version": "UNAVAILABLE"
+    },
+    "SciML Service": {
+      "version": "UNAVAILABLE"
+    }
+  }
+}
