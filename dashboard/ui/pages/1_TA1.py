@@ -14,7 +14,8 @@ from dashboard.sections import (
     render_section_scenario_status, 
     render_section_integration_status, 
     render_section_time, 
-    render_section_accuracy
+    render_section_accuracy,
+    render_section_errors
 )
 
 st.title("TA1 Integration Dashboard")
@@ -46,4 +47,5 @@ render_section_scenario_status(scenarios)
 render_section_integration_status(scenarios)
 render_section_time(scenarios)
 render_section_accuracy(scenarios)
+render_section_errors(scenarios)
 render_scenario_viewer(scenarios)
