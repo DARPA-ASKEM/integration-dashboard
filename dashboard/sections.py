@@ -99,7 +99,7 @@ def render_section_accuracy(scenarios):
     st.write(f"### Accuracy")
     df = get_feature_table(scenarios, "accuracy")
     df = df.replace([None, 0], "")
-    st.dataframe()
+    st.dataframe(df)
 
 def render_section_errors(scenarios):
     st.write(f"### Error Logs")
