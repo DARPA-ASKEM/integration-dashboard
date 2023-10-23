@@ -6,10 +6,17 @@ import streamlit.components.v1 as components
 
 from dashboard.formatting import custom_title
 
+# Function to apply styles
+def highlight_empty(val):
+    """
+    Use with df = df.style.applymap(highlight_empty)
+    This is a TODO we can implement later if we'd like
+    """
+    return 'background-color: #F8F8F8' if val == '' else ''
 
 def render_scenario_viewer(scenarios):
     st.write(f"### Scenario Viewer")
-    scenario_name = st.selectbox("Select a pipeline:", list(scenarios.keys()))
+    scenario_name = st.selectbox("Select a pipeline:", sorted(list(scenarios.keys())))
     scenario = scenarios[scenario_name]
 
     graph = nx.DiGraph()
@@ -71,6 +78,7 @@ def get_feature_table(scenarios, feature):
     df = pd.DataFrame(index=list(scenarios.keys()), columns=list(step_names))
     for (scenario_name, step_name), result in results.items():
         df.at[scenario_name, step_name] = result
+    df = df.sort_index(axis=0).sort_index(axis=1)
     return df
     
 def render_section_integration_status(scenarios):
@@ -83,10 +91,28 @@ def render_section_time(scenarios):
     st.write(f"### Execution Time")
     df = get_feature_table(scenarios, "time")
     df = df.applymap(lambda t: round(t,2) if t is not None else None, ) # `df.round(2)` is ineffective
+    df = df.replace([None, 0], "")
     st.dataframe(df)
 
 
 def render_section_accuracy(scenarios):
     st.write(f"### Accuracy")
     df = get_feature_table(scenarios, "accuracy")
+    df = df.replace([None, 0], "")
+    st.dataframe(df)
+
+def render_section_errors(scenarios):
+    st.write(f"### Error Logs")
+    df_data = []
+    for scenario_name, scenario_details in scenarios.items():
+        row_data = {"Scenario": scenario_name}
+        for step_name, step_details in scenario_details["steps"].items():
+            if step_details["success"] == True or step_details["success"] == None:
+                row_data[step_name] = ""            
+            else:
+                row_data[step_name] = step_details.get("result",{}).get("job_error","")
+        df_data.append(row_data)
+    df = pd.DataFrame(df_data)
+    df.set_index("Scenario", inplace=True)
+    df = df.sort_index(axis=0).sort_index(axis=1)
     st.dataframe(df)
