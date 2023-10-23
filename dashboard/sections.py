@@ -16,7 +16,7 @@ def render_scenario_viewer(scenarios):
     steps = scenario["steps"]
     total_time = 0
     for step_name, step_details in steps.items():
-        total_time += step_details["time"]
+        total_time += step_details["time"] if step_details["time"] is not None else 0
         if step_details["success"] is not None:
             status_color = 'green' if step_details['success'] else 'red'
         else:
@@ -52,7 +52,7 @@ def render_section_scenario_status(scenarios):
         "Scenario": list(scenarios.keys()),
         "Success": [scenario["success"] for scenario in scenarios.values()], 
         "Total Time": [
-            round(sum([step["time"] for step in scenario["steps"].values()]),2) 
+            round(sum([step["time"] for step in scenario["steps"].values() if step["time"] is not None]),2) 
             for scenario in scenarios.values()
         ]
     }
@@ -82,7 +82,7 @@ def render_section_integration_status(scenarios):
 def render_section_time(scenarios):
     st.write(f"### Execution Time")
     df = get_feature_table(scenarios, "time")
-    df = df.applymap(lambda t: round(t,2), ) # `df.round(2)` is ineffective
+    df = df.applymap(lambda t: round(t,2) if t is not None else None, ) # `df.round(2)` is ineffective
     st.dataframe(df)
 
 
