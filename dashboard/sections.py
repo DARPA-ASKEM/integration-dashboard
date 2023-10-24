@@ -16,7 +16,6 @@ def highlight_empty(val):
 
 def render_scenario_viewer(scenarios):
     st.write(f"### Scenario Viewer")
-    st.write(">**Note**: tasks marked as grey were not run due to an upstream failure.")
     scenario_name = st.selectbox("Select a pipeline:", sorted(list(scenarios.keys())))
     scenario = scenarios[scenario_name]
 
@@ -35,17 +34,23 @@ def render_scenario_viewer(scenarios):
             status_color = 'gray'
         graph.add_node(step_name, color=status_color)
     shape = scenario["shape"]
-    for link in shape:
-        # Ensure both nodes exist before adding an edge
-        if link["from"] in graph.nodes and link["to"] in graph.nodes:
-            graph.add_edge(link["from"], link["to"])
+
     nx.set_node_attributes(graph, "box", "shape")
     pipeline = Network(notebook=False, directed=True)
     pipeline.from_nx(graph)
+    for link in shape:
+        # Ensure both nodes exist before adding an edge
+        if link["from"] in graph.nodes and link["to"] in graph.nodes:
+            # If the link is soft, set it to be dashed and gray
+            if link["link_type"] == "soft":
+                pipeline.add_edge(link["from"], link["to"], color="gray", dashes=True)
+            else:
+                pipeline.add_edge(link["from"], link["to"])
+
     pipeline.options = {
         'layout': {
             'hierarchical': {
-                'enabled': True,
+                'enabled': False,
                 'direction': 'LR',
                 'sortMethod': 'directed'
             },
@@ -56,6 +61,10 @@ def render_scenario_viewer(scenarios):
     
     st.write(f"**Scenario description**: `{scenario['description']}`")
     st.write(f"**Total Time** `{round(total_time,2)}`")
+    st.write(">**Note**: tasks marked as grey were not run due to an upstream failure. " \
+             "Solid lines indicated a `hard` dependency between the tasks. "\
+             "Dashed lines indicate a `soft` dependency between the tasks meaning that "\
+             "if results are available from the upstream task, they will be used (but are not required).")
     components.html(display, height=800, width=800)
     
 

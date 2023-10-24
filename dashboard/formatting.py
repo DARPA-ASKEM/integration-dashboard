@@ -3,7 +3,5 @@ def custom_title(s):
     FULL_CAPS = ['pdf', 'amr']
 
     words = s.replace('_', ' ').split()
-    capitalized_words = [word.upper() if word in FULL_CAPS else word.title() for word in words]
+    capitalized_words = [word.upper() if word.upper() in FULL_CAPS else word.title() for word in words]
     return ' '.join(capitalized_words)
-
-
