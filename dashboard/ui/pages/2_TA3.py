@@ -17,6 +17,14 @@ st.title("TA3 Integration Dashboard")
 # Let the user select a report based on formatted timestamps
 report = select_report("ta3")
 
+# Download report button
+st.download_button(
+    label="Download report `json`",
+    data=json.dumps(report, indent=4).encode('utf-8'),
+    file_name="report.json",
+    mime="application/json"
+)
+
 report_scenarios = report["scenarios"]
 services = report["services"]
 
