@@ -20,8 +20,15 @@ from dashboard.sections import (
 
 st.title("TA1 Integration Dashboard")
 
-
 report = select_report("ta1")
+
+# Download report button
+st.download_button(
+    label="Download report `json`",
+    data=json.dumps(report, indent=4).encode('utf-8'),
+    file_name="report.json",
+    mime="application/json"
+)
 
 st.sidebar.markdown("""
 # TA1
