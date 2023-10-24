@@ -14,10 +14,4 @@ and [`simulation-integration`](https://github.com/DARPA-ASKEM/simulation-integra
 Terarium regularly uploads new reports to S3. See [here](https://github.com/DARPA-ASKEM/simulation-integration) 
 to add TA1 scenarios and [here](https://github.com/DARPA-ASKEM/simulation-integration) for TA3.
 """
-
-st.sidebar.markdown("""
-Integration Dashboard
-
-Homepage for the Integration Dashboard 
-""")
     
