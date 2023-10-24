@@ -31,6 +31,9 @@ TA1 integration status and quality metrics.
 
 services = report["services"]
 st.write("## Service Info")
+st.write(">**Note**: if the `Version` for any service is unavailable it indicates that the report"\
+         "runner was unable to communicate with the service. In that case, substantial failures"\
+         "are expected across the board.")
 service_names = list(services.keys())
 service_data = {
     "Service": service_names,

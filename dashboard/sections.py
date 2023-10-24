@@ -16,6 +16,7 @@ def highlight_empty(val):
 
 def render_scenario_viewer(scenarios):
     st.write(f"### Scenario Viewer")
+    st.write(">**Note**: tasks marked as grey were not run due to an upstream failure.")
     scenario_name = st.selectbox("Select a pipeline:", sorted(list(scenarios.keys())))
     scenario = scenarios[scenario_name]
 
@@ -23,6 +24,10 @@ def render_scenario_viewer(scenarios):
     steps = scenario["steps"]
     total_time = 0
     for step_name, step_details in steps.items():
+        # Check if the success value is "N/A" and skip this iteration
+        if step_details["success"] == "N/A":
+            continue
+        
         total_time += step_details["time"] if step_details["time"] is not None else 0
         if step_details["success"] is not None:
             status_color = 'green' if step_details['success'] else 'red'
@@ -31,7 +36,9 @@ def render_scenario_viewer(scenarios):
         graph.add_node(step_name, color=status_color)
     shape = scenario["shape"]
     for link in shape:
-        graph.add_edge(link["from"], link["to"])
+        # Ensure both nodes exist before adding an edge
+        if link["from"] in graph.nodes and link["to"] in graph.nodes:
+            graph.add_edge(link["from"], link["to"])
     nx.set_node_attributes(graph, "box", "shape")
     pipeline = Network(notebook=False, directed=True)
     pipeline.from_nx(graph)
@@ -47,9 +54,8 @@ def render_scenario_viewer(scenarios):
     display = pipeline.generate_html()
 
     
-    st.write(f"### {scenario_name}")
-    st.text(scenario["description"])
-    st.metric("Total Time", round(total_time,2))
+    st.write(f"**Scenario description**: `{scenario['description']}`")
+    st.write(f"**Total Time** `{round(total_time,2)}`")
     components.html(display, height=800, width=800)
     
 
@@ -83,8 +89,11 @@ def get_feature_table(scenarios, feature):
     
 def render_section_integration_status(scenarios):
     st.write(f"### Integration Status")
+    st.write(">**Note**: tasks are marked with a ✅ if they succeed and a ❌ if they fail. "\
+             "⚪ indicates that a task was not run due to an upstream task failure. "\
+            "Empty cells indicate that a task was not applicable/relevant to a given scenario.")
     df = get_feature_table(scenarios, "success")
-    df.replace({False: "❌", True: "✅", None: ""}, inplace=True)
+    df.replace({False: "❌", True: "✅", "N/A": "", None: "⚪"}, inplace=True)  
     st.dataframe(df)
 
 def render_section_time(scenarios):
