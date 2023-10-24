@@ -61,5 +61,8 @@ def select_report(ta):
     if ta == "ta1":
         for scenario in report["scenarios"].values(): 
             scenario["steps"] = { custom_title(name): step for name, step in scenario["steps"].items()}
-            scenario["shape"] = [ {"from": custom_title(edge["from"]), "to": custom_title(edge["to"])} for edge in scenario["shape"]]
+            scenario["shape"] = [ {"from": custom_title(edge["from"]), 
+                                   "to": custom_title(edge["to"]), 
+                                   "link_type": edge.get("link_type", "hard")} 
+                                   for edge in scenario["shape"]]
     return report 
