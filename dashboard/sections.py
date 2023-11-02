@@ -107,9 +107,11 @@ def render_section_integration_status(scenarios):
 
 def render_section_time(scenarios):
     st.write(f"### Execution Time")
+    st.write(f"Task execution time in seconds")
     df = get_feature_table(scenarios, "time")
     df = df.applymap(lambda t: round(t,2) if t is not None else None, ) # `df.round(2)` is ineffective
     df = df.replace([None, 0], "")
+    df = df.fillna("")
     st.dataframe(df)
 
 

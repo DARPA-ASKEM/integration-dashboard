@@ -20,6 +20,12 @@ from dashboard.sections import (
 
 st.title("TA1 Integration Dashboard")
 
+st.write("Whenever the test harness is run, the various assets are published to the `Integration Test Suite` project in Terarium."\
+         " Click below to view the report results in Terarium.")
+st.link_button("View report assets in Terarium", "https://app.terarium.ai/projects/102/overview")
+
+st.divider()
+
 report = select_report("ta1")
 
 # Download report button
