@@ -57,10 +57,10 @@ st.dataframe(pd.DataFrame(service_data), hide_index=True)
 
 st.write("## Tasks Overview")
 tasks = {
-    "Code to AMR": "SKEMA: Convert a repository or annotated dynamics into an AMR.",
-    "Equations to AMR": "SKEMA: Convert LaTeX or Presentation MathML to a Petrinet or Regulatory Network AMR.",
-    "Link AMR": "SKEMA/MIT: Link an AMR to extracted variables in order to 'enrich' the AMR.",
-    "PDF Extraction": "COSMOS: Perform table, text and figure extraction over a PDF paper.",
+    "Code to AMR": "SKEMA: Extracts equations and models from a codebase or code snippet. A code collection or code snippet (Python, Fortran) is provided as input and the SKEMA Code2FN pipeline interprets the code as a Function Network; SKEMA MORAE then attempts to identify the core dynamics, interpret it as a supported model type, and outputs a serialized AMR.",
+    "Equations to AMR": "SKEMA: Extracts AMR from a set of input equations. Each input equation is assumed to be a single equation expression. The input representations may be equation images, LaTeX or Presentation MathML. The input representations are converted into the internal SKEMA MathExpressionTree representation; this is further interpreted as a representation of a supported model framework type and output as a serialized AMR.",
+    "Link AMR": "SKEMA/MIT: Given an AMR and a set of variable extractions, this task uses the SKEMA alignment service to link the elements (states and parameters) of the AMR to the variable extractions. Matching is primarily driven by text embedding similarity, but for elements that lack descriptions, the alignment will use a set of heuristics depending on the AMR subtype.",
+    "PDF Extraction": "COSMOS: Given an input pdf file, this task (1) extracts the text using the COSMOS endpoint, then (2) runs the SKEMA Text Reading service to extract variable descriptions, variables with values, variable units, and scenario context from the text. Optionally the MIT extractions are also collected and integrated. Output consists of a unified JSON format that includes all of the extractions.",
     "Profile Dataset":"MIT: Analyze a structured dataset by examining the provided sample and its description. This process aims to gain insights into its schema, contents, and column-specific statistics.",
     "Profile Model": "MIT: Evaluate a model through an in-depth review of its code and description. This includes understanding aspects such as authorship, schema, provenance, and usage.",
     "Variable Extraction": "SKEMA/MIT: Identify and extract variables from scientific papers. This involves mapping these variables to the relevant dataset, grounding them in a knowledge graph, and gathering additional pertinent information."
