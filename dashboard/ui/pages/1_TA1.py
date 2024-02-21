@@ -55,6 +55,23 @@ service_data = {
 }
 st.dataframe(pd.DataFrame(service_data), hide_index=True)
 
+st.write("## Tasks Overview")
+tasks = {
+    "Code to AMR": "SKEMA: Convert a repository or annotated dynamics into an AMR.",
+    "Equations to AMR": "SKEMA: Convert LaTeX or Presentation MathML to a Petrinet or Regulatory Network AMR.",
+    "Link AMR": "SKEMA/MIT: Link an AMR to extracted variables in order to 'enrich' the AMR.",
+    "PDF Extraction": "COSMOS: Perform table, text and figure extraction over a PDF paper.",
+    "Profile Dataset":"MIT: Analyze a structured dataset by examining the provided sample and its description. This process aims to gain insights into its schema, contents, and column-specific statistics.",
+    "Profile Model": "MIT: Evaluate a model through an in-depth review of its code and description. This includes understanding aspects such as authorship, schema, provenance, and usage.",
+    "Variable Extraction": "SKEMA/MIT: Identify and extract variables from scientific papers. This involves mapping these variables to the relevant dataset, grounding them in a knowledge graph, and gathering additional pertinent information."
+        }
+
+# Convert the dictionary into a list of tuples (key-value pairs)
+tasks_data = list(tasks.items())
+# Create the DataFrame
+tasks_df = pd.DataFrame(tasks_data, columns=["Task Name", "Task Description"])
+st.dataframe(tasks_df, hide_index=True)
+
 
 scenarios = report["scenarios"]
 
